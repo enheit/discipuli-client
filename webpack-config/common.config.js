@@ -40,7 +40,12 @@ const common = (isProduction) => ({
             options: { sourceMap: true }
           },
         ]
-      }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader?name=public/fonts/[name].[ext]'
+      },
     ]
   },
   plugins: [
