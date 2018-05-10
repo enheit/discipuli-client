@@ -1,0 +1,64 @@
+input Credentials {
+  # The email address of a user
+  email: String!
+
+  # The password of a user
+  password: String!
+}
+
+# The JWT token
+type JWT {
+  # token
+  jwtToken: String
+}
+
+type Mutation {
+  # Authorize a user
+  Authorization(credentials: Credentials): JWT
+}
+
+# The user of the application
+type Person {
+  # Person's id
+  id: ID!
+
+  # The name of the user
+  firstName: String!
+
+  # The surname of the user
+  lastName: String!
+
+  # The short information of the user
+  about: String
+
+  # The role of the user
+  role: String!
+}
+
+# The account of the user
+type PersonAccount {
+  # Person's id
+  personId: ID!
+
+  # The email of the user's account
+  email: String!
+
+  # The hashed password of the user's account
+  password: String!
+}
+
+# The role of the user
+type PersonRole {
+  # Role's id
+  id: ID!
+
+  # The name of the role
+  role: String!
+}
+
+type Query {
+  PersonById(id: ID!): Person
+  PersonRoleById(id: ID!): PersonRole
+  PersonAccountById(id: ID!): PersonAccount
+}
+

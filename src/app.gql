@@ -1,0 +1,6 @@
+{
+  PersonById(id: 1) {
+    firstName
+    lastName
+  }
+}
