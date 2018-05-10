@@ -1,0 +1,35 @@
+.button {
+  border: 0;
+  color: $normal;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &--positive {
+    background: $positive;
+
+    &:not(:disabled):hover {
+      background: lighten($positive, 2%);
+    }
+
+    &:active {
+      background: lighten($positive, 4%);
+    }
+  }
+
+  &--negative {
+    background: $negative;
+
+    &:not(:disabled):hover {
+      background: lighten($negative, 5%);
+    }
+
+    &:active {
+      background: lighten($negative, 4%);
+    }
+  }
+
+  &--disabled {
+    @include disabled;
+  }
+}
