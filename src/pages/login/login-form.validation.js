@@ -1,18 +1,20 @@
-export default (values) => {
+import errorMessages from '../../localization/errors.messages';
+
+export default (values, asd, kk) => {
   let errors = {};
 
   if(!values.email) {
-    errors.email = 'The email is reqruied';
+    errors.email = errorMessages.required('email address');
   }
 
   if(values.email) {
     if(values.email.length > 254) {
-      errors.email = 'The email length is 254 symbols'
+      errors.email = errorMessages.tooLong('email address');
     }
   }
 
   if(!values.password) {
-    errors.password = 'The password is required';
+    errors.password = errorMessages.required('password');
   }
 
   return errors;
