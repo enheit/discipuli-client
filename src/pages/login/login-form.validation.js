@@ -1,6 +1,7 @@
 import errorMessages from '../../localization/errors.messages';
+import fields from '../../constants/field.constants';
 
-export default (values, asd, kk) => {
+export default (values) => {
   let errors = {};
 
   if(!values.email) {
@@ -8,7 +9,7 @@ export default (values, asd, kk) => {
   }
 
   if(values.email) {
-    if(values.email.length > 254) {
+    if(values.email.length > fields.EMAIL_MAX_LENGTH) {
       errors.email = errorMessages.tooLong('email address');
     }
   }
