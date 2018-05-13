@@ -1,0 +1,14 @@
+.headline {
+  font-size: 24px;
+  font-weight: normal;
+  color: $neutral;
+  margin: 0;
+
+  &--large {
+    font-size: 34px;
+  }
+
+  &--small {
+    font-size: 18px;
+  }
+}
