@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { compose, graphql } from 'react-apollo';
 import { withFormik } from 'formik';
 
-// Configs
-import routes from '../../routes/routes.config';
-
 // Mutations
 import Authorize from './graphql/mutations/authorization.graphql';
+
+// Form utils
+import loginFormValidation from './login-form.validation';
+import loginFormSubmit from './login-form.submit';
+import loginFormInitValues from './login-form.initial-values';
 
 // Components
 import {
@@ -20,8 +22,13 @@ import {
 class Login extends Component {
   render() {
     return (
-      <div className="login-container">
-        <form onSubmit={this.props.handleSubmit} className="login-form">
+      <div
+        className="login-container"
+      >
+        <form
+          onSubmit={this.props.handleSubmit}
+          className="login-form"
+        >
           <Label
             for="email"
             title="E-mail"
@@ -86,42 +93,8 @@ export default compose(
   }),
   withFormik({
     displayName: 'LoginForm',
-    mapPropsToValues: () => ({
-      email: '',
-      password: ''
-    }),
-    validate: (values) => {
-      let errors = {};
-
-      if(!values.email) {
-        errors.email = 'The email is reqruied';
-      }
-
-      if(values.email) {
-        if(values.email.length > 254) {
-          errors.email = 'The email length is 254 symbols'
-        }
-      }
-
-      if(!values.password) {
-        errors.password = 'The password is required';
-      }
-
-      return errors;
-    },
-    handleSubmit: async ({ email, password }, { props, setErrors }) => {
-      const { data } = await props.authorize(email, password);
-
-      if(data.Authorization) {
-        const { jwtToken } = data.Authorization;
-        localStorage.setItem('token', jwtToken);
-        props.history.push(routes.root());
-      } else {
-        setErrors({
-          email: 'The email address is invalid',
-          password: 'The password is invalid'
-        });
-      }
-    },
-  })
+    mapPropsToValues: loginFormInitValues,
+    validate: loginFormValidation,
+    handleSubmit: loginFormSubmit,
+  }),
 )(Login);
