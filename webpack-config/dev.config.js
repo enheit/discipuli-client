@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const dev = {
   mode: 'development',
@@ -13,7 +14,10 @@ const dev = {
         pathRewrite: {"^/api" : ""},
       }
     }
-  }
+  },
+  plugins: [
+    new BundleAnalyzerPlugin(),
+  ]
 };
 
 export default dev;

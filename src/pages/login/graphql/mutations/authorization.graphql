@@ -1,0 +1,8 @@
+mutation Authorize($email: String!, $password: String!) {
+  Authorization(credentials: {
+    email: $email
+    password: $password
+  }) {
+    jwtToken
+  }
+}

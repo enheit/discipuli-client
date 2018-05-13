@@ -1,11 +1,24 @@
 {
   "presets": [
-    "env",
+    [
+      "env", {
+        "targets": {
+          "browsers": [
+            "chrome >= 39"
+          ]
+        }
+      }
+    ],
     "react",
     "stage-2"
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    [
+      "transform-runtime", {
+        "regenerator": true
+      }
+    ]
   ]
 }
