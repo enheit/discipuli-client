@@ -1,0 +1,12 @@
+.message {
+  font-family: Lato;
+  font-size: 14px;
+
+  &--error {
+    color: $negative;
+  }
+
+  &--success {
+    color: $positive;
+  }
+}
