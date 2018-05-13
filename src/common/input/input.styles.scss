@@ -3,6 +3,13 @@
   outline: none;
   font-size: 14px;
   color: $neutral;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background: #f9f9f9;
+
+  &::placeholder {
+    color: lighten($neutral, 40%);
+  }
 
   &--disabled {
     @include disabled;

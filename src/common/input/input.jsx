@@ -5,6 +5,8 @@ import classNames from 'classnames';
 const Input = (props) => {
   return (
     <input
+      id={props.id}
+      name={props.name}
       className={classNames({
         'input': true,
         'input--disabled': props.disabled,
@@ -21,7 +23,9 @@ const Input = (props) => {
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  id: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool
 };
