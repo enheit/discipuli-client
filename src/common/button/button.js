@@ -12,6 +12,7 @@ const Button = (props) => {
         'button--positive': props.positive,
         'button--negative': props.negative,
       })}
+      type={props.type}
       onClick={props.onClick}
     >
       {props.children}
@@ -19,12 +20,17 @@ const Button = (props) => {
   )
 };
 
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
+Button.defaultProps = {
+  type: 'submit',
+  onClick: () => {},
+};
 
+Button.propTypes = {
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   positive: PropTypes.bool,
   negative: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default Button;

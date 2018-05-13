@@ -8,11 +8,11 @@
   &--positive {
     background: $positive;
 
-    &:not(:disabled):hover {
+    &:enabled:hover {
       background: lighten($positive, 2%);
     }
 
-    &:active {
+    &:enabled:active {
       background: lighten($positive, 4%);
     }
   }
@@ -20,11 +20,11 @@
   &--negative {
     background: $negative;
 
-    &:not(:disabled):hover {
-      background: lighten($negative, 5%);
+    &:enabled:hover {
+      background: lighten($negative, 2%);
     }
 
-    &:active {
+    &:enabled:active {
       background: lighten($negative, 4%);
     }
   }
