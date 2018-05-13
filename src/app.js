@@ -8,6 +8,8 @@ import routes from './routes/routes.config';
 import PrivateRoute from './routes/private.router';
 import UnauthorizedOnlyRoute from './routes/unauthorized-only.router';
 
+import { EmptyLayout, MainLayout } from '../src/layouts';
+
 const LoadableLogin = Loadable({
   loader: () => import('./pages/login/login'),
   loading: () => <div>Loading</div>,
@@ -28,10 +30,12 @@ class App extends React.Component {
           to={routes.lectures()}
         />
         <UnauthorizedOnlyRoute
+          layout={EmptyLayout}
           path={routes.login()}
           component={LoadableLogin}
         />
         <PrivateRoute
+          layout={MainLayout}
           path={routes.lectures()}
           component={LoadableLectrues}
         />

@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 
 import routes from './routes.config';
 
-const UnauthorizedOnlyRoute = ({ component: Component, ...rest }) => (
+const UnauthorizedOnlyRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={(props) => {
     const token = localStorage.getItem('token');
 
@@ -20,7 +20,11 @@ const UnauthorizedOnlyRoute = ({ component: Component, ...rest }) => (
         />
       )
     } catch (error) {
-      return <Component {...props} />;
+      return (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )
     }
   }}/>
 )
