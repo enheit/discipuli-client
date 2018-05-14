@@ -1,0 +1,42 @@
+.dropdown-menu {
+  &__entry-button {
+    cursor: pointer;
+    border-width: 0;
+    background: transparent;
+    font-size: 14px;
+  }
+
+  &__items {
+    display: grid;
+    position: absolute;
+    background: $normal;
+    width: 180px;
+    padding: 5px 0;
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 lighten($neutral, 40%);
+  }
+
+  &__item {
+    padding: 5px 10px;
+    color: $neutral;
+    font-size: 14px;
+    background: $normal;
+
+    &:hover {
+      background: darken($normal, 5%);
+    }
+  }
+
+  button.dropdown-menu__item {
+    cursor: pointer;
+    border-width: 0;
+    text-align: left;
+  }
+
+  a.dropdown-menu__item {
+    text-decoration: none;
+  }
+
+
+}
