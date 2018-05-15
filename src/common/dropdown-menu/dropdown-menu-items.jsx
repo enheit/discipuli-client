@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class DropdownMenuItems extends Component {
   constructor(props) {
@@ -23,7 +24,12 @@ class DropdownMenuItems extends Component {
 
   render() {
     return (
-      <div ref={this.componentRef} className="dropdown-menu__items">
+      <div ref={this.componentRef} className={
+        classNames({
+          'dropdown-menu__items': true,
+          'dropdown-menu__items--horizontal-reverse': this.props.horizontalReverse,
+        })
+      }>
         {this.props.children}
       </div>
     )
@@ -32,6 +38,7 @@ class DropdownMenuItems extends Component {
 
 DropdownMenuItems.propTypes = {
   handleOutsideEvent: PropTypes.func.isRequired,
+  horizontalReverse: PropTypes.bool,
 };
 
 export default DropdownMenuItems;

@@ -28,6 +28,7 @@ class DropdownMenu extends Component {
           <DropdownMenuItems
             handleOutsideEvent={this.toggleDropdownMenu}
             parentRef={this.componentRef}
+            horizontalReverse={this.props.horizontalReverse}
           >
             {this.props.children}
           </DropdownMenuItems>}
@@ -38,6 +39,7 @@ class DropdownMenu extends Component {
 
 DropdownMenu.propTypes = {
   title: PropTypes.string.isRequired,
+  horizontalReverse: PropTypes.bool,
 };
 
 export default DropdownMenu;

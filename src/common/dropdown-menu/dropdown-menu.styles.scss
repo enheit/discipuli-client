@@ -1,4 +1,6 @@
 .dropdown-menu {
+  position: relative;
+
   &__entry-button {
     cursor: pointer;
     border-width: 0;
@@ -15,6 +17,10 @@
     margin-top: 5px;
     border-radius: 5px;
     box-shadow: 0 1px 2px 0 lighten($neutral, 40%);
+
+    &--horizontal-reverse {
+      right: 0;
+    }
   }
 
   &__item {
