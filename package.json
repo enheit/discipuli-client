@@ -24,6 +24,7 @@
     "classnames": "^2.2.5",
     "formik": "^0.11.11",
     "graphql-tag": "^2.9.2",
+    "js-base64": "^2.4.5",
     "jsonwebtoken": "^8.2.1",
     "lodash.merge": "^4.6.1",
     "node-sass": "^4.9.0",
