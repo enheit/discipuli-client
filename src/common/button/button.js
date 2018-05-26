@@ -21,8 +21,11 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  type: 'submit',
   onClick: () => {},
+  disabled: false,
+  positive: false,
+  negative: false,
+  type: 'submit',
 };
 
 Button.propTypes = {
