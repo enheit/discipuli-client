@@ -14,6 +14,12 @@ const Headline = (props) => {
   )
 }
 
+Headline.defaultProps = {
+  title: '',
+  large: false,
+  small: false,
+};
+
 Headline.propTypes = {
   title: PropTypes.string.isRequired,
   large: PropTypes.bool,
