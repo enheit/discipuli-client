@@ -1,0 +1,21 @@
+.registration-container {
+  display: grid;
+  grid-template: 1fr auto 1fr / 1fr minmax(auto, 300px) 1fr;
+  grid-template-areas:
+    ". . ."
+    ". login-form ."
+    ". . .";
+  align-content: center;
+  height: 100%;
+}
+
+.registration-form {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-area: login-form;
+  margin: 20px;
+
+  .button {
+    justify-self: start;
+  }
+}

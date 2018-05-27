@@ -1,0 +1,17 @@
+mutation Register(
+  $email: String!,
+  $firstName: String!,
+  $lastName: String!,
+  $password: String!,
+  $repeatPassword: String!
+) {
+  Registration(registrationFields: {
+    email: $email,
+    firstName: $firstName,
+    lastName: $lastName
+    password: $password
+    repeatPassword: $repeatPassword,
+  }) {
+    email
+  }
+}

@@ -1,0 +1,3 @@
+query IsEmailExist($email: String!) {
+  IsEmailExist(email: $email)
+}

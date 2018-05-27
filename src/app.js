@@ -15,6 +15,11 @@ const LoadableLogin = Loadable({
   loading: () => <div>Loading</div>,
 });
 
+const LoadableRegistration = Loadable({
+  loader: () => import('./pages/registration/registration'),
+  loading: () => <div>Loading</div>,
+});
+
 const LoadableLectrues = Loadable({
   loader: () => import('./pages/lectures/lectures'),
   loading: () => <div>Loading</div>,
@@ -33,6 +38,11 @@ class App extends React.Component {
           layout={EmptyLayout}
           path={routes.login()}
           component={LoadableLogin}
+        />
+        <UnauthorizedOnlyRoute
+          layout={EmptyLayout}
+          path={routes.registration()}
+          component={LoadableRegistration}
         />
         <PrivateRoute
           layout={MainLayout}
