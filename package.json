@@ -6,8 +6,6 @@
   "scripts": {
     "prod": "webpack --env.prod",
     "dev": "webpack-dev-server --hot --env.dev",
-    "relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
-    "gs": "get-graphql-schema http://localhost:3001/graphql > schema.graphql",
     "jest": "jest --config ./jest.config.json"
   },
   "keywords": [
