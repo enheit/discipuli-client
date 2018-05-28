@@ -1,16 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { verify } from 'jsonwebtoken';
 
 import routes from './routes.config';
+import Authorization from '../services/authorization.service';
 
 const UnauthorizedOnlyRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={(props) => {
-    const token = localStorage.getItem('token');
+    const isTokenValid = Authorization.checkToken();
 
-    try {
-      const decoded = verify(token, 'secretKey');
-
+    if(isTokenValid) {
       return (
         <Redirect
           to={{
@@ -19,14 +17,15 @@ const UnauthorizedOnlyRoute = ({ component: Component, layout: Layout, ...rest }
           }}
         />
       )
-    } catch (error) {
-      return (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      )
     }
-  }}/>
-)
+
+    return (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    )
+  }}
+  />
+);
 
 export default UnauthorizedOnlyRoute;

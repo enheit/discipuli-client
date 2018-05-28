@@ -1,32 +1,31 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { verify } from 'jsonwebtoken';
+import Authorization from '../services/authorization.service';
 
 import routes from './routes.config';
 
 const PrivateRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={(props) => {
-    const token = localStorage.getItem('token');
+    const isTokenValid = Authorization.checkToken();
 
-    try {
-      const decoded = verify(token, 'secretKey');
-
+    if(isTokenValid) {
       return (
         <Layout>
           <Component {...props} />
         </Layout>
-      )
-    } catch (error) {
-      return (
-        <Redirect
-          to={{
-            pathname: routes.login(),
-            state: { from: props.location }
-          }}
-        />
-      )
+      );
     }
-  }}/>
+
+    return (
+      <Redirect
+        to={{
+          pathname: routes.login(),
+          state: { from: props.location }
+        }}
+      />
+    )
+  }}
+  />
 );
 
 export default PrivateRoute;
