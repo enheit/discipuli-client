@@ -5,7 +5,7 @@
   color: $neutral;
   border-radius: 5px;
   padding: 5px 10px;
-  background: #f9f9f9;
+  background: darken($normal, 2.5%);
 
   &::placeholder {
     color: lighten($neutral, 40%);
