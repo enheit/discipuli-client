@@ -1,0 +1,74 @@
+%select__icon {
+  display: flex;
+  align-items: center;
+  color: $neutral;
+  cursor: pointer;
+}
+
+.select {
+  position: relative;
+
+  &__selector {
+    display: flex;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    @extend .input;
+    border-radius: 5px 0 0 5px;
+    width: 100%;
+  }
+
+  &__clear-icon {
+    @extend %select__icon;
+    font-size: 16px;
+    background: darken($normal, 2.5%);
+  }
+
+  &__dropdown-icon {
+    @extend %select__icon;
+    border-radius: 0 5px 5px 0;
+    background: darken($normal, 2.5%);
+
+    &--disabled {
+      cursor: not-allowed;
+      color: lighten($neutral, 40%);
+    }
+  }
+
+  &__options {
+    margin-top: 5px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background: $normal;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 1px 2px 0 lighten($neutral, 40%);
+
+    &--open {
+      display: block;
+    }
+
+    &--closed {
+      display: none;
+    }
+  }
+
+  &__option {
+    padding: 5px 10px;
+    color: $neutral;
+    font-size: 14px;
+    background: $normal;
+    cursor: pointer;
+
+    // hovered should goes before selected to not break styles inheritence
+    &--hovered {
+      background: darken($normal, 2.5%);
+    }
+
+    &--selected {
+      background: darken($normal, 5%);
+    }
+  }
+}
