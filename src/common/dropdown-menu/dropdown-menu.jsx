@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import DropdownMenuItems from './dropdown-menu-items';
+import DetectOutsideClick from '../../render-props/detect-outside-click';
 
 class DropdownMenu extends Component {
   constructor(props) {
@@ -10,8 +11,6 @@ class DropdownMenu extends Component {
     this.state = {
       isOpen: false,
     };
-
-    this.componentRef = React.createRef();
   }
 
   toggleDropdownMenu = () => {
@@ -20,18 +19,30 @@ class DropdownMenu extends Component {
 
   render() {
     return (
-      <div ref={this.componentRef} className="dropdown-menu">
-        <button className="dropdown-menu__entry-button" onClick={this.toggleDropdownMenu}>
+      <div
+        className="dropdown-menu"
+      >
+        <button
+          className="dropdown-menu__entry-button"
+          onClick={this.toggleDropdownMenu}
+        >
           {this.props.title}
         </button>
         {this.state.isOpen &&
-          <DropdownMenuItems
-            handleOutsideEvent={this.toggleDropdownMenu}
-            parentRef={this.componentRef}
-            horizontalReverse={this.props.horizontalReverse}
-          >
-            {this.props.children}
-          </DropdownMenuItems>}
+          <DetectOutsideClick
+            onClick={this.toggleDropdownMenu}
+            render={(ref) => {
+              return (
+                <DropdownMenuItems
+                  ref={ref}
+                  handleOutsideEvent={this.toggleDropdownMenu}
+                  horizontalReverse={this.props.horizontalReverse}
+                >
+                  {this.props.children}
+                </DropdownMenuItems>
+              )
+            }}
+          />}
       </div>
     )
   }
