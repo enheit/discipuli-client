@@ -7,10 +7,6 @@ class DetectOutsideClick extends Component {
     this.ref = React.createRef();
   }
 
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-  }
-
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside);
   }
@@ -29,5 +25,10 @@ class DetectOutsideClick extends Component {
     return this.props.render(this.ref);
   }
 }
+
+DetectOutsideClick.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
+};
 
 export default DetectOutsideClick;
