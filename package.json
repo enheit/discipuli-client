@@ -26,6 +26,7 @@
     "js-base64": "^2.4.5",
     "jsonwebtoken": "^8.2.1",
     "lodash.merge": "^4.6.1",
+    "moment": "^2.22.1",
     "node-sass": "^4.9.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
