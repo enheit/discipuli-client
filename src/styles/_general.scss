@@ -14,3 +14,16 @@ body {
   margin: 0;
   height: 100%;
 }
+
+.link {
+  color: $functional;
+
+  &:hover,
+  &:visited:hover {
+    color: lighten($functional, 15%);
+  }
+
+  &:visited {
+    color: darken($functional, 15%);
+  }
+}
