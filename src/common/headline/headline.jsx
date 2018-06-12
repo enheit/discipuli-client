@@ -9,7 +9,7 @@ const Headline = (props) => {
       'headline--large': props.large,
       'headline--small': props.small,
     })}>
-      {props.title}
+      {props.title ? props.title : props.render()}
     </h1>
   )
 }
