@@ -1,0 +1,12 @@
+query Courses {
+  courses: Courses {
+    id,
+    name,
+    startDate,
+    endDate,
+    city,
+    country,
+    specializationId,
+    specialization
+  }
+}

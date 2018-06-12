@@ -1,0 +1,18 @@
+.courses {
+  &__title,
+  &__filter,
+  &__info {
+    padding: 10px 20px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 350px));
+    grid-gap: 20px;
+    padding: 20px;
+  }
+}
+
+.specialization {
+  width: 200px;
+}

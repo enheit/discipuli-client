@@ -1,0 +1,16 @@
+.course {
+  display: grid;
+
+  &__header {
+    padding-bottom: 5px;
+  }
+
+  &__body {
+    display: grid;
+    grid-row-gap: 5px;
+  }
+
+  &__footer {
+    padding-top: 5px;
+  }
+}
