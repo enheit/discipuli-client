@@ -264,6 +264,14 @@ class Select extends Component {
     this.toggleSelect();
   }
 
+  getPlaceholder = () => {
+    if(this.props.loading) {
+      return 'Loading'
+    }
+
+    return this.props.placeholder;
+  }
+
   render() {
     return (
       <WithFilter
@@ -277,8 +285,8 @@ class Select extends Component {
               >
                 <input
                   ref={this.inputRef}
-                  disabled={this.props.disabled}
-                  placeholder={this.props.placeholder}
+                  disabled={this.props.loading || this.props.disabled}
+                  placeholder={this.getPlaceholder()}
                   className="select__input"
                   onClick={this.handleSelectorClick}
                   value={this.state.inputValue}
@@ -320,6 +328,7 @@ class Select extends Component {
 
 Select.defaultProps = {
   placeholder: 'Select',
+  loading: false,
 };
 
 // TODO: Add propTypes
