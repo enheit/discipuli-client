@@ -7,6 +7,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 const common = (isProduction) => ({
   entry: './src/browser.setup',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, '../../dist'),
   },
   resolve: {
