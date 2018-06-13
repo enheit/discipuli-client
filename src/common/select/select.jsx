@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import Options from './options';
 import Option from './option';
@@ -331,6 +332,16 @@ Select.defaultProps = {
   loading: false,
 };
 
-// TODO: Add propTypes
+Select.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    }).isRequired,
+  ).isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  loading: PropTypes.bool,
+};
 
 export default Select;
