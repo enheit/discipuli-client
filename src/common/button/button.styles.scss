@@ -4,6 +4,9 @@
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+  // Button-link
+  text-decoration: none;
+  font-size: 12px;
 
   &--positive {
     background: $positive;
