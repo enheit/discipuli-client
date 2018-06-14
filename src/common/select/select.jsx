@@ -9,6 +9,16 @@ import Option from './option';
 import WithFilter from '../../render-props/with-filter';
 import DetectOutsideClick from '../../render-props/detect-outside-click';
 
+const getSelectedOption = (options, value) => {
+    return options
+      .find(option => option.value === value);
+  }
+
+const getSelectedOptionIndex = (options, value) => {
+    return options
+      .findIndex(option => option.value === value);
+  }
+
 class Select extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +27,26 @@ class Select extends Component {
     this.optionsRef = null;
 
     this.state = this.initialState;
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.options.length > 1) {
+      const option = getSelectedOption(nextProps.options, nextProps.value);
+      const optionIndex = getSelectedOptionIndex(nextProps.options, nextProps.value);
+      const selectedOption = !!option ? option : null;
+      const selectedOptionIndex = optionIndex !== -1 ? optionIndex : null;
+      const focusedOptionIndex = !!selectedOptionIndex ? selectedOptionIndex : 0;
+      const inputValue = !!selectedOption ? selectedOption.label : '';
+
+      return {
+        inputValue,
+        selectedOption,
+        selectedOptionIndex,
+        focusedOptionIndex,
+      };
+    }
+
+    return null;
   }
 
   get initialState() {
@@ -330,9 +360,14 @@ class Select extends Component {
 Select.defaultProps = {
   placeholder: 'Select',
   loading: false,
+  options: [],
 };
 
 Select.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
