@@ -43,7 +43,7 @@ class App extends React.Component {
         <Redirect
           exact
           path={routes.root()}
-          to={routes.lectures()}
+          to={routes.courses()}
         />
         <UnauthorizedOnlyRoute
           layout={EmptyLayout}
