@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose, graphql, withApollo } from 'react-apollo';
-import { withFormik} from 'formik';
+import { withFormik } from 'formik';
 
 // Components
 import { Button, Input, Label, Message } from '../../common';
@@ -11,11 +11,10 @@ import Register from './graphql/mutations/registration.graphql'
 // Form utils
 import registrationFormSubmit from './registration-form.submit';
 import registrationFormValidation from './registration-form.validation';
-import registrationFormInitValues from './registration.intitial-values';
+import registrationFormInitValues from './registration.initial-values';
 
 class Registration extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="registration-container">
         <form className="registration-form" onSubmit={this.props.handleSubmit}>
@@ -27,7 +26,6 @@ class Registration extends Component {
             id="email"
             name="email"
             placeholder="E-mail"
-            component={Input}
             type="text"
             value={this.props.values.email}
             onChange={this.props.handleChange}
@@ -45,7 +43,6 @@ class Registration extends Component {
             id="firstName"
             name="firstName"
             placeholder="First name"
-            component={Input}
             type="text"
             value={this.props.values.firstName}
             onChange={this.props.handleChange}
@@ -63,7 +60,6 @@ class Registration extends Component {
             id="lastName"
             name="lastName"
             placeholder="Last name"
-            component={Input}
             type="text"
             value={this.props.values.lastName}
             onChange={this.props.handleChange}
@@ -81,7 +77,6 @@ class Registration extends Component {
             id="password"
             name="password"
             placeholder="Password"
-            component={Input}
             type="password"
             value={this.props.values.password}
             onChange={this.props.handleChange}
@@ -99,7 +94,6 @@ class Registration extends Component {
             id="repeatPassword"
             name="repeatPassword"
             placeholder="Repeat password"
-            component={Input}
             type="password"
             value={this.props.values.repeatPassword}
             onChange={this.props.handleChange}
