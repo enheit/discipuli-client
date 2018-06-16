@@ -1,0 +1,3 @@
+query IsCourseNameExist($courseName: String!) {
+  isCourseNameExist: IsCourseNameExist(name: $courseName)
+}

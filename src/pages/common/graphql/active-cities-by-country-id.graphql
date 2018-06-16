@@ -1,0 +1,8 @@
+query ActiveCitiesByCountryId($countryId: ID!, $isActive: Boolean!) {
+  cities: ActiveCitiesByCountryId(countryId: $countryId, isActive: $isActive) {
+    id,
+    name,
+    countryId,
+    isActive
+  }
+}

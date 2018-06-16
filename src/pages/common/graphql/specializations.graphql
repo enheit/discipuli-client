@@ -1,0 +1,6 @@
+query Specializations {
+  specializations: Specializations {
+    id,
+    name,
+  }
+}

@@ -4,6 +4,7 @@ export default {
   registration: () => '/registration',
   lectures: () => '/lectures',
   courses: () => '/courses',
+  createCourse: () => '/courses/create',
   courseRegistration: (courseId) => `/courses/${courseId}/registration`,
   courseDetails: (courseId) => `/courses/${courseId}/details`,
 };

@@ -1,0 +1,6 @@
+query Countries {
+  countries: Countries {
+    id,
+    name,
+  }
+}

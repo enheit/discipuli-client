@@ -1,0 +1,16 @@
+.create-course {
+  &__title {
+    padding: 10px 20px;
+  }
+}
+
+.create-course-form {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-area: login-form;
+  margin: 20px;
+
+  .button {
+    justify-self: start;
+  }
+}

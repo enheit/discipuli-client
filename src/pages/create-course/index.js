@@ -1,0 +1,1 @@
+export { default as CreateCourse } from './create-course';

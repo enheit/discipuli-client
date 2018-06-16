@@ -1,0 +1,19 @@
+mutation CreateCourse(
+  $courseName: String!,
+  $specializationId: ID!,
+  $countryId: ID!,
+  $cityId: ID!,
+  $startDate: Date!,
+  $endDate: Date!
+) {
+  CreateCourse(courseCreationFields: {
+    courseName: $courseName,
+    specializationId: $specializationId,
+    countryId: $countryId,
+    cityId: $cityId,
+    startDate: $startDate,
+    endDate: $endDate,
+  }) {
+    name
+  }
+}
