@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Query, compose, graphql } from 'react-apollo';
-import { Route } from 'react-router-dom';
+import { compose, graphql } from 'react-apollo';
 
 // GraphQL Queries
 import COURSES from './graphql/courses.graphql';
-import SPECIALIZATIONS from './graphql/specializations.graphql';
+import SPECIALIZATIONS from '../common/graphql/specializations.graphql';
 
 // Services
 import Authorization from '../../services/authorization.service';
+
+// Utils
+import reduceOptions from '../../utils/options-reducer';
 
 // Constants
 import DateFormat from '../../constants/date-format.constants';
 
 // Components
 import { Course } from './course';
-import { Text, Select, Headline } from '../../common';
+import { Text, Select, Headline, Button, ButtonLink } from '../../common';
+import Can from '../../common/can/can-bound';
+import routesConfig from '../../routes/routes.config';
 
 class Courses extends Component {
   constructor(props) {
@@ -34,15 +38,6 @@ class Courses extends Component {
 
   handleSpecializationFilterChange = (option) => {
     this.setState({ specialization: option });
-  }
-
-  reduceOptions = (specializations) => {
-    return specializations.map(specialization => {
-      return {
-        label: specialization.name,
-        value: specialization.id,
-      };
-    });
   }
 
   filterCoursesBySpecialization = (course) => {
@@ -66,12 +61,27 @@ class Courses extends Component {
             title="Courses"
           />
         </div>
+        <Can
+          I="create"
+          a="course"
+          render={() => (
+            <div className="courses__actions">
+              <ButtonLink
+                positive
+                to={routesConfig.createCourse()}
+              >
+                Create a course
+              </ButtonLink>
+            </div>
+          )}
+        />
         <div className="courses__filter">
           <div className="specialization">
             <Select
+              value={this.state.specialization && this.state.specialization.value}
               loading={this.props.isSpecializationsLoading}
               placeholder="Specialization"
-              options={this.reduceOptions(this.props.specializations)}
+              options={reduceOptions(this.props.specializations, 'name', 'id')}
               onChange={this.handleSpecializationFilterChange}
             />
           </div>
