@@ -6,3 +6,4 @@ export { Message } from './message';
 export { DropdownMenu } from './dropdown-menu';
 export { Text } from './text';
 export { Select } from './select';
+export { Can, createCanWithBoundAbilities } from './can';
