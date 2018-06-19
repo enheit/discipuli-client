@@ -1,0 +1,24 @@
+.lecture {
+  &__title,
+  &__actions,
+  &__presentation,
+  &__task,
+  &__homework {
+    padding: 10px 20px;
+  }
+
+  &__lecturer {
+    padding: 0 20px;
+  }
+
+  &__headline {
+    margin-bottom: 10px;
+  }
+
+  &__lectures {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 350px));
+    grid-gap: 20px;
+    padding: 20px;
+  }
+}

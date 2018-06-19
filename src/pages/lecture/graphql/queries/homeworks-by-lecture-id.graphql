@@ -1,0 +1,8 @@
+query HomeworksByLectureId($lectureId: ID!) {
+  homeworks: HomeworksByLectureId(lectureId: $lectureId) {
+    id,
+    name,
+    description,
+    createdBy
+  }
+}

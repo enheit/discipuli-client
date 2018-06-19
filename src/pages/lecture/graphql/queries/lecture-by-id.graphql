@@ -1,0 +1,8 @@
+query LectureById($lectureId: ID!) {
+  lecture: LectureById(lectureId: $lectureId) {
+    name,
+    lecturer,
+    startDate,
+    endDate,
+  }
+}

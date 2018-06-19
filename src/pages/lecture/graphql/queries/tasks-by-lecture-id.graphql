@@ -1,0 +1,8 @@
+query TasksByLectureId($lectureId: ID!) {
+  tasks: TasksByLectureId(lectureId: $lectureId) {
+    id,
+    name,
+    description,
+    createdBy
+  }
+}
