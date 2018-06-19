@@ -1,0 +1,6 @@
+query PersonsByRoleId($roleId: ID!) {
+  persons: PersonsByRoleId(roleId: $roleId) {
+    id: accountId,
+    name: fullName
+  }
+}

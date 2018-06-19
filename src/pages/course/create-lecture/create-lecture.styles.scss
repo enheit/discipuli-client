@@ -1,0 +1,16 @@
+.create-lecture {
+  &__title {
+    padding: 10px 20px;
+  }
+}
+
+.create-lecture-form {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-area: create-lecture-form;
+  margin: 20px;
+
+  .button {
+    justify-self: start;
+  }
+}

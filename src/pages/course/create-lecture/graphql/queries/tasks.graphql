@@ -1,0 +1,6 @@
+query TasksBySpecializationId($specializationId: ID!) {
+  tasks: TasksBySpecializationId(specializationId: $specializationId) {
+    id,
+    name,
+  }
+}

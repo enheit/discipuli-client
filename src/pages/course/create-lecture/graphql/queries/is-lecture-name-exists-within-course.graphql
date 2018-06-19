@@ -1,0 +1,6 @@
+query isLectureNameExistsWithinCourse($name: String!, $courseId: ID!) {
+  isLectureNameExistsWithinCourse(
+    name: $name,
+    courseId: $courseId
+  )
+}

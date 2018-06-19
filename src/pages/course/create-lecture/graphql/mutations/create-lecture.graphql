@@ -1,0 +1,23 @@
+mutation CreateLecture(
+  $courseId: ID!,
+  $presentationId: ID!,
+  $lecturerId: ID!,
+  $lectureName: String!,
+  $taskId: ID!,
+  $homeworkId: ID!,
+  $startDate: DateTime!,
+  $endDate: DateTime!
+) {
+  CreateLecture(lectureCreationFields: {
+    courseId: $courseId,
+    presentationId: $presentationId,
+    lecturerId: $lecturerId,
+    name: $lectureName,
+    startDate: $startDate,
+    endDate: $endDate,
+    taskId: $taskId,
+    homeworkId: $homeworkId
+  }) {
+    name
+  }
+}

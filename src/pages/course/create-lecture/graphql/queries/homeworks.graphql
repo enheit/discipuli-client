@@ -1,0 +1,6 @@
+query HomeworksBySpecializationId($specializationId: ID!) {
+  homeworks: HomeworksBySpecializationId(specializationId: $specializationId) {
+    id,
+    name,
+  }
+}

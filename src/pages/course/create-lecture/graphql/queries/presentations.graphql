@@ -1,0 +1,6 @@
+query PresentationsBySpecializationId($specializationId: ID!) {
+  presentations: PresentationsBySpecializationId(specializationId: $specializationId) {
+    id,
+    name,
+  }
+}

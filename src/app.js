@@ -21,6 +21,11 @@ const LoadableRegistration = Loadable({
   loading: () => <div>Loading</div>,
 });
 
+const LoadableCreateLecture = Loadable({
+  loader: () => import('./pages/course/create-lecture/create-lecture'),
+  loading: () => <div>Loading</div>,
+});
+
 const LoadableCourse = Loadable({
   loader: () => import('./pages/course/course'),
   loading: () => <div>Loading4</div>,
@@ -71,6 +76,11 @@ class App extends React.Component {
           layout={MainLayout}
           path={'/:specializationId/courses/:courseId'}
           component={LoadableCourse}
+        />
+        <PrivateRoute
+          layout={MainLayout}
+          path={'/:specializationId/courses/:courseId/lectures/create'}
+          component={LoadableCreateLecture}
         />
       </Switch>
     );
