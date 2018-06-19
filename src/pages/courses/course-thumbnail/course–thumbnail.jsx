@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // Components
-import { Button, Headline, Text } from '../../../common';
+import { Headline, Text } from '../../../common';
 
 // Constants
 import routes from '../../../routes/routes.config';
 
-const Course = (props) => {
+const CourseThumbnail = (props) => {
     return (
-      <div className="course">
-        <div className="course__header">
+      <div className="course-thumbnail">
+        <div className="course-thumbnail__header">
           <Headline
-            className="course__headline"
+            className="course-thumbnail__headline"
             render={() => (
               <Link
                 className="link"
@@ -24,17 +24,17 @@ const Course = (props) => {
             )}
           />
         </div>
-        <div className="course__body">
-          <Text className="course__location">
+        <div className="course-thumbnail__body">
+          <Text className="course-thumbnail__location">
             {props.country}, {props.city}
           </Text>
-          <Text className="course__duration">
+          <Text className="course-thumbnail__duration">
             {props.startDate}
             {" – "}
             {props.endDate}
           </Text>
         </div>
-        <div className="course__footer">
+        <div className="course-thumbnail__footer">
           <Link
             className="link"
             to={props.isAuthorized
@@ -48,11 +48,11 @@ const Course = (props) => {
     )
 }
 
-Course.defaultProps = {
+CourseThumbnail.defaultProps = {
   isAuthorized: false,
 };
 
-Course.propTypes = {
+CourseThumbnail.propTypes = {
   name: PropTypes.string.isRequired,
   courseId: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
@@ -63,4 +63,4 @@ Course.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
 };
 
-export default Course;
+export default CourseThumbnail;

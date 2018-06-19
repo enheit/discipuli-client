@@ -16,7 +16,7 @@ import reduceOptions from '../../utils/options-reducer';
 import DateFormat from '../../constants/date-format.constants';
 
 // Components
-import { Course } from './course';
+import { CourseThumbnail } from './course-thumbnail';
 import { Text, Select, Headline, Button, ButtonLink } from '../../common';
 import Can from '../../common/can/can-bound';
 import routesConfig from '../../routes/routes.config';
@@ -93,7 +93,7 @@ class Courses extends Component {
         </div>
         <div className="courses__list">
           {filteredCourses.map(course => (
-            <Course
+            <CourseThumbnail
               key={course.id}
               courseId={course.id}
               name={course.name}
