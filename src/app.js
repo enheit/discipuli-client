@@ -31,11 +31,6 @@ const LoadableCreateCourse = Loadable({
   loading: () => <div>Loading</div>,
 });
 
-const LoadableLectrues = Loadable({
-  loader: () => import('./pages/lectures/lectures'),
-  loading: () => <div>Loading</div>,
-});
-
 class App extends React.Component {
   render() {
     return (
@@ -54,11 +49,6 @@ class App extends React.Component {
           layout={EmptyLayout}
           path={routes.registration()}
           component={LoadableRegistration}
-        />
-        <PrivateRoute
-          layout={MainLayout}
-          path={routes.lectures()}
-          component={LoadableLectrues}
         />
         <PublicRoute
           exact
