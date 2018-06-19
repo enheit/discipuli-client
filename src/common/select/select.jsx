@@ -30,7 +30,7 @@ class Select extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if(nextProps.options.length > 1) {
+    if(nextProps.options.length > 0) {
       const option = getSelectedOption(nextProps.options, nextProps.value);
       const optionIndex = getSelectedOptionIndex(nextProps.options, nextProps.value);
       const selectedOption = !!option ? option : null;
