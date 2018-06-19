@@ -26,6 +26,7 @@ ButtonLink.defaultProps = {
 };
 
 ButtonLink.propTypes = {
+  to: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   positive: PropTypes.bool,
   negative: PropTypes.bool,
