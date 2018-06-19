@@ -315,6 +315,8 @@ class Select extends Component {
                 className="select__selector"
               >
                 <input
+                  id={this.props.id}
+                  name={this.props.name}
                   ref={this.inputRef}
                   disabled={this.props.loading || this.props.disabled}
                   placeholder={this.getPlaceholder()}
@@ -368,6 +370,8 @@ Select.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  id: PropTypes.string,
+  name: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
