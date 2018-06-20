@@ -11,6 +11,11 @@ import PublicRoute from './routes/public.router';
 
 import { EmptyLayout, MainLayout } from '../src/layouts';
 
+const LoadableCourseSubscriptions = Loadable({
+  loader: () => import('./pages/course-subscriptions/course-subscriptions'),
+  loading: () => <div>Loading</div>,
+});
+
 const LoadableCourseRegistration = Loadable({
   loader: () => import('./pages/course-registration/course-registration'),
   loading: () => <div>Loading</div>,
@@ -102,6 +107,11 @@ class App extends React.Component {
           layout={MainLayout}
           path={'/courses/:courseId/registration'}
           component={LoadableCourseRegistration}
+        />
+        <PrivateRoute
+          layout={MainLayout}
+          path={'/courses/subscriptions'}
+          component={LoadableCourseSubscriptions}
         />
       </Switch>
     );

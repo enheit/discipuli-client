@@ -1,0 +1,7 @@
+query CourseSubscriptions($personAccountId: ID!) {
+  courses: CourseSubscriptions(personAccountId: $personAccountId) {
+    id,
+    name,
+    specializationId,
+  }
+}

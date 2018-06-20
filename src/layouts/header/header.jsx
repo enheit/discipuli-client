@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import { verify } from 'jsonwebtoken';
@@ -31,6 +31,21 @@ const ExtendedHeader = withApollo(withRouter((props) => {
   return (
     <React.Fragment>
       <DropdownMenu title="Menu" horizontalReverse>
+        <NavLink
+          exact
+          activeClassName="dropdown-menu__item--active"
+          to={routes.courses()}
+          className="dropdown-menu__item"
+        >
+          Courses
+        </NavLink>
+        <NavLink
+          activeClassName="dropdown-menu__item--active"
+          to={routes.coursesSubscriptions()}
+          className="dropdown-menu__item"
+        >
+          Subscriptions
+        </NavLink>
         <button onClick={logout} className="dropdown-menu__item">Exit</button>
       </DropdownMenu>
     </React.Fragment>

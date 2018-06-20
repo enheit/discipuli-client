@@ -33,6 +33,15 @@
     &:hover {
       background: darken($normal, 5%);
     }
+
+    &--active {
+      color: $normal;
+      background: $functional;
+
+      &:hover {
+        background: darken($functional, 5%);
+      }
+    }
   }
 
   button.dropdown-menu__item {
