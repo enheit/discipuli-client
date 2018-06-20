@@ -1,0 +1,12 @@
+query NotSubscribedCourses($personAccountId: ID!) {
+  courses: NotSubscribedCourses(personAccountId: $personAccountId) {
+    id,
+    name,
+    startDate,
+    endDate,
+    city,
+    country,
+    specializationId,
+    specialization
+  }
+}

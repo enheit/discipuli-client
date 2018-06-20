@@ -1,0 +1,16 @@
+.course-registration {
+  &__title,
+  &__actions {
+    padding: 10px 20px;
+  }
+
+  &__details {
+    display: grid;
+    padding: 10px 20px;
+    grid-gap: 10px;
+
+    .headline {
+      margin-bottom: 10px;
+    }
+  }
+}

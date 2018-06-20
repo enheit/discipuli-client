@@ -3,7 +3,7 @@ import { compose, graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 // GraphQL Queries
-import COURSE_BY_ID from './graphql/queries/course-by-id.graphql';
+import COURSE_BY_ID from '../common/graphql/queries/course-by-id.graphql';
 import LECTURES_BY_COURSE_ID from './graphql/queries/lectures-by-course-id.graphql';
 
 // Components

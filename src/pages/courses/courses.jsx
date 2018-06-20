@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { compose, graphql } from 'react-apollo';
+import { compose, graphql, withApollo } from 'react-apollo';
 
 // GraphQL Queries
 import COURSES from './graphql/courses.graphql';
+import NOT_SUBSCRIBED_COURSES from './graphql/not-subscribed-courses.graphql';
 import SPECIALIZATIONS from '../common/graphql/specializations.graphql';
 
 // Services
@@ -115,17 +116,43 @@ Courses.defaultProps = {
   specializations: [],
 }
 
+const fetchCourses = () => {
+  if (Authorization.checkToken()) { // Check if the user is authorized
+    const { accountId } = Authorization.getProfile();
+
+    const request = graphql(NOT_SUBSCRIBED_COURSES, {
+      options: (props) => ({
+        variables: {
+          personAccountId: accountId,
+        },
+        fetchPolicy: 'cache-and-network'
+      }),
+      props: ({ data: { courses, loading } }, ownProps) => ({
+        courses,
+        isCoursesLoading: loading,
+      }),
+    });
+
+    return request;
+  }
+
+  const request =  graphql(COURSES, {
+    props: ({ data: { courses, loading } }, ownProps) => ({
+      courses,
+      isCoursesLoading: loading,
+    }),
+  });
+
+  return request;
+}
+
 export default compose(
+  withApollo,
   graphql(SPECIALIZATIONS, {
     props: ({ data: { specializations, loading } }, ownProps) => ({
       specializations,
       isSpecializationsLoading: loading,
     }),
   }),
-  graphql(COURSES, {
-    props: ({ data: { courses, loading } }, ownProps) => ({
-      courses,
-      isCoursesLoading: loading,
-    }),
-  })
+  fetchCourses(),
 )(Courses);

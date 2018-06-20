@@ -1,0 +1,11 @@
+mutation RegisterForCourse(
+  $courseId: ID!,
+  $personAccountId: ID!
+) {
+  register: RegisterForCourse(
+    courseId: $courseId,
+    personAccountId: $personAccountId
+  ) {
+    id
+  }
+}

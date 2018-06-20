@@ -1,5 +1,9 @@
 query CourseById($courseId: ID!) {
   course: CourseById(courseId: $courseId) {
-    name
+    name,
+    city,
+    country,
+    startDate,
+    endDate
   }
 }
