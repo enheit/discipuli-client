@@ -1,9 +1,9 @@
 import errorMessages from '../../localization/errors.messages';
 import fields from '../../constants/field.constants';
-import isCourseNameExist from './graphql/queries/is-course-name-exist.graphql'
+import isCourseNameExist from './graphql/queries/is-course-name-exist.graphql';
 
 export default async (values, props) => {
-  let errors = {};
+  const errors = {};
 
   if (!values.courseName) {
     errors.courseName = errorMessages.required('course name');
@@ -38,7 +38,7 @@ export default async (values, props) => {
 
   if (!values.startDate) {
     errors.startDate = errorMessages.required('start date');
-  } else if (Date.parse(values.startDate) > Date.parse(values.endDate) ) {
+  } else if (Date.parse(values.startDate) > Date.parse(values.endDate)) {
     errors.startDate = errorMessages.greaterThan('start date', 'end date');
   }
 

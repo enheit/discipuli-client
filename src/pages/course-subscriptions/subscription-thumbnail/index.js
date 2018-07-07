@@ -1,1 +1,1 @@
-export { default as SubscriptionThumbnail } from './subscription-thumbnail';
+export { default } from './subscription-thumbnail';

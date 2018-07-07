@@ -1,1 +1,1 @@
-export { default as Lecture } from './lecture';
+export { default } from './lecture';

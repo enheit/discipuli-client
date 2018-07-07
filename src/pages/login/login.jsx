@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { withFormik } from 'formik';
 
@@ -14,73 +15,91 @@ import loginFormInitValues from './login-form.initial-values';
 import {
   Input,
   Button,
-  Headline,
   Label,
-  Message
+  Message,
 } from '../../common';
 
-class Login extends Component {
-  render() {
-    return (
-      <div
-        className="login-container"
+const Login = props => (
+  <div
+    className="login-container"
+  >
+    <form
+      onSubmit={props.handleSubmit}
+      className="login-form"
+    >
+      <Label
+        for="email"
+        title="E-mail"
+      />
+      <Input
+        id="email"
+        name="email"
+        placeholder="email"
+        component={Input}
+        type="text"
+        value={props.values.email}
+        onChange={props.handleChange}
+      />
+      {props.touched.email && props.errors.email
+        && (
+          <Message
+            message={props.errors.email}
+            error
+          />
+        )
+      }
+      <Label
+        for="password"
+        title="Password"
+      />
+      <Input
+        id="password"
+        name="password"
+        placeholder="password"
+        component={Input}
+        type="password"
+        value={props.values.password}
+        onChange={props.handleChange}
+      />
+      {props.touched.password && props.errors.password
+        && (
+          <Message
+            message={props.errors.password}
+            error
+          />
+        )
+      }
+      <Button
+        type="submit"
+        positive
       >
-        <form
-          onSubmit={this.props.handleSubmit}
-          className="login-form"
-        >
-          <Label
-            for="email"
-            title="E-mail"
-          />
-          <Input
-            id="email"
-            name="email"
-            placeholder="email"
-            component={Input}
-            type="text"
-            value={this.props.values.email}
-            onChange={this.props.handleChange}
-          />
-          {this.props.touched.email && this.props.errors.email &&
-            <Message
-              message={this.props.errors.email}
-              error
-            />}
-          <Label
-            for="password"
-            title="Password"
-          />
-          <Input
-            id="password"
-            name="password"
-            placeholder="password"
-            component={Input}
-            type="password"
-            value={this.props.values.password}
-            onChange={this.props.handleChange}
-          />
-          {this.props.touched.password && this.props.errors.password &&
-            <Message
-              message={this.props.errors.password}
-              error
-            />}
-          <Button
-            type="submit"
-            positive
-          >
-            let me in
-          </Button>
-        </form>
-      </div>
-    )
-  }
-}
+        let me in
+      </Button>
+    </form>
+  </div>
+);
+
+Login.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  values: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }).isRequired,
+  touched: PropTypes.shape({
+    email: PropTypes.bool,
+    password: PropTypes.bool,
+  }).isRequired,
+  errors: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }).isRequired,
+};
 
 export default compose(
   graphql(Authorize, {
-    props: ({ mutate }) => ({
-      authorize: (email, password) => mutate({
+    props: props => ({
+      authorize: (email, password) => props.mutate({
         variables: {
           email,
           password,
@@ -88,8 +107,8 @@ export default compose(
       }),
     }),
     options: {
-      errorPolicy: 'all'
-    }
+      errorPolicy: 'all',
+    },
   }),
   withFormik({
     displayName: 'LoginForm',

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter } from 'react-router-dom';
 
-import './styles/index';
+import './styles/index.scss';
 import client from './apollo.setup';
 import App from './app';
 
@@ -13,5 +13,5 @@ render(
       <App />
     </ApolloProvider>
   </BrowserRouter>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

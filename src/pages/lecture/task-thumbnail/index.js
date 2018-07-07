@@ -1,1 +1,1 @@
-export { default as TaskThumbnail } from './task-thumbnail';
+export { default } from './task-thumbnail';

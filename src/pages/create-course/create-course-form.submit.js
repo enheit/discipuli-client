@@ -1,6 +1,6 @@
-export default async (formValues, { props, setErrors, resetForm }) => {
+export default async (formValues, formikBag) => {
   try {
-    const { data } = await props.createCourse(
+    await formikBag.props.createCourse(
       formValues.courseName,
       formValues.specialization,
       formValues.country,
@@ -9,7 +9,7 @@ export default async (formValues, { props, setErrors, resetForm }) => {
       formValues.endDate,
     );
 
-    resetForm();
+    formikBag.resetForm();
   } catch (error) {
     console.error(error);
   }

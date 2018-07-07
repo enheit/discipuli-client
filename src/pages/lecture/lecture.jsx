@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
@@ -9,21 +10,21 @@ import HOMEWORKS_BY_LECTURE_ID from './graphql/queries/homeworks-by-lecture-id.g
 
 // Components
 import { Headline } from '../../common';
-import { TaskThumbnail } from './task-thumbnail';
-import { HomeworkThumbnail } from './homework-thumbnail';
+import TaskThumbnail from './task-thumbnail';
+import HomeworkThumbnail from './homework-thumbnail';
 
 class Lecture extends Component {
-  getLectureName = () => {
-    return this.props.isLectureLoading
+  getLectureName = () => (
+    this.props.isLectureLoading
       ? 'Lecture'
-      : this.props.lecture.name;
-  }
+      : this.props.lecture.name
+  )
 
-  getLecturerName = () => {
-    return this.props.isLectureLoading
+  getLecturerName = () => (
+    this.props.isLectureLoading
       ? 'John Doe'
-      : this.props.lecture.lecturer;
-  }
+      : this.props.lecture.lecturer
+  )
 
   render() {
     return (
@@ -36,7 +37,9 @@ class Lecture extends Component {
         </div>
 
         <div className="lecture__lecturer">
-          with {this.getLecturerName()}
+          with
+          {' '}
+          {this.getLecturerName()}
         </div>
 
         <div className="lecture__presentation">
@@ -46,10 +49,9 @@ class Lecture extends Component {
               width: '100%',
               border: '1px solid #ddd',
               borderRadius: 5,
-              background: '#eee'
+              background: '#eee',
             }}
-          >
-          </div>
+          />
         </div>
 
         <div className="lecture__task">
@@ -58,16 +60,14 @@ class Lecture extends Component {
               title="Tasks"
             />
           </div>
-          {this.props.tasks.map(task => {
-            return (
-              <TaskThumbnail
-                key={task.id}
-                name={task.name}
-                description={task.description}
-                createdBy={task.createdBy}
-              />
-            )
-          })}
+          {this.props.tasks.map(task => (
+            <TaskThumbnail
+              key={task.id}
+              name={task.name}
+              description={task.description}
+              createdBy={task.createdBy}
+            />
+          ))}
         </div>
 
         <div className="lecture__homework">
@@ -76,16 +76,14 @@ class Lecture extends Component {
               title="Homework"
             />
           </div>
-          {this.props.homeworks.map(task => {
-            return (
-              <HomeworkThumbnail
-                key={task.id}
-                name={task.name}
-                description={task.description}
-                createdBy={task.createdBy}
-              />
-            )
-          })}
+          {this.props.homeworks.map(homework => (
+            <HomeworkThumbnail
+              key={homework.id}
+              name={homework.name}
+              description={homework.description}
+              createdBy={homework.createdBy}
+            />
+          ))}
         </div>
       </div>
     );
@@ -95,41 +93,52 @@ class Lecture extends Component {
 Lecture.defaultProps = {
   tasks: [],
   homeworks: [],
+  lecture: {},
+};
+
+Lecture.propTypes = {
+  isLectureLoading: PropTypes.bool.isRequired,
+  lecture: PropTypes.shape({
+    name: PropTypes.string,
+    lecturer: PropTypes.string,
+  }),
+  tasks: PropTypes.arrayOf(PropTypes.shape(TaskThumbnail.propTypes)),
+  homeworks: PropTypes.arrayOf(PropTypes.shape(TaskThumbnail.propTypes)),
 };
 
 export default compose(
   withRouter,
   graphql(LECTURE_BY_ID, {
-    options: (props) => ({
+    options: props => ({
       variables: {
         lectureId: props.match.params.lectureId,
       },
     }),
-    props: ({ data: { lecture, loading } }, ownProps) => ({
-      lecture,
-      isLectureLoading: loading,
+    props: props => ({
+      lecture: props.data.lecture,
+      isLectureLoading: props.data.loading,
     }),
   }),
   graphql(TASKS_BY_LECTURE_ID, {
-    options: (props) => ({
+    options: props => ({
       variables: {
         lectureId: props.match.params.lectureId,
       },
     }),
-    props: ({ data: { tasks, loading } }, ownProps) => ({
-      tasks,
-      areTasksLoading: loading,
+    props: props => ({
+      tasks: props.data.tasks,
+      areTasksLoading: props.data.loading,
     }),
   }),
   graphql(HOMEWORKS_BY_LECTURE_ID, {
-    options: (props) => ({
+    options: props => ({
       variables: {
         lectureId: props.match.params.lectureId,
       },
     }),
-    props: ({ data: { homeworks, loading } }, ownProps) => ({
-      homeworks,
-      areHomeworksLoading: loading,
+    props: props => ({
+      homeworks: props.data.homeworks,
+      areHomeworksLoading: props.data.loading,
     }),
   }),
 )(Lecture);

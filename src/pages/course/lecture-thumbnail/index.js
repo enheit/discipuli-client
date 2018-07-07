@@ -1,1 +1,1 @@
-export { default as LectureThumbnail } from './lecture-thumbnail';
+export { default } from './lecture-thumbnail';

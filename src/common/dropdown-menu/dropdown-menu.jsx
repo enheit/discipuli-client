@@ -14,7 +14,7 @@ class DropdownMenu extends Component {
   }
 
   toggleDropdownMenu = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
   }
 
   render() {
@@ -23,16 +23,17 @@ class DropdownMenu extends Component {
         className="dropdown-menu"
       >
         <button
+          type="button"
           className="dropdown-menu__entry-button"
           onClick={this.toggleDropdownMenu}
         >
           {this.props.title}
         </button>
-        {this.state.isOpen &&
-          <DetectOutsideClick
-            onClick={this.toggleDropdownMenu}
-            render={(ref) => {
-              return (
+        {this.state.isOpen
+          && (
+            <DetectOutsideClick
+              onClick={this.toggleDropdownMenu}
+              render={ref => (
                 <DropdownMenuItems
                   ref={ref}
                   handleOutsideEvent={this.toggleDropdownMenu}
@@ -40,17 +41,19 @@ class DropdownMenu extends Component {
                 >
                   {this.props.children}
                 </DropdownMenuItems>
-              )
-            }}
-          />}
+              )}
+            />
+          )
+        }
       </div>
-    )
+    );
   }
 }
 
 DropdownMenu.propTypes = {
   title: PropTypes.string.isRequired,
-  horizontalReverse: PropTypes.bool,
+  horizontalReverse: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default DropdownMenu;

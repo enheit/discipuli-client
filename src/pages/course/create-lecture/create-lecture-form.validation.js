@@ -3,9 +3,9 @@ import fields from '../../../constants/field.constants';
 import IS_LECTURE_NAME_EXISTS_WITHIN_COURSE from './graphql/queries/is-lecture-name-exists-within-course.graphql';
 
 export default async (values, props) => {
-  let errors = {};
+  const errors = {};
 
-  if(!values.lectureName) {
+  if (!values.lectureName) {
     errors.lectureName = errorMessages.required('lecture name');
   } else if (values.lectureName.length > fields.LECTURE_NAME_MAX_LENGTH) {
     errors.lectureName = errorMessages.tooLong('lecture name');
@@ -25,25 +25,25 @@ export default async (values, props) => {
     }
   }
 
-  if(!values.presentation) {
+  if (!values.presentation) {
     errors.presentation = errorMessages.required('presentation');
   }
 
-  if(!values.task) {
+  if (!values.task) {
     errors.task = errorMessages.required('task');
   }
 
-  if(!values.homework) {
+  if (!values.homework) {
     errors.homework = errorMessages.required('homework');
   }
 
-  if(!values.lecturer) {
+  if (!values.lecturer) {
     errors.lecturer = errorMessages.required('lecturer');
   }
 
   if (!values.startDate) {
     errors.startDate = errorMessages.required('start date');
-  } else if (Date.parse(values.startDate) > Date.parse(values.endDate) ) {
+  } else if (Date.parse(values.startDate) > Date.parse(values.endDate)) {
     errors.startDate = errorMessages.greaterThan('start date', 'end date');
   }
 

@@ -3,5 +3,5 @@ export default () => ({
   lastName: '',
   email: '',
   password: '',
-  repeatPassword: ''
+  repeatPassword: '',
 });

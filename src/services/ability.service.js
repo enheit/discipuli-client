@@ -19,13 +19,11 @@ class Ability {
   }
 
   update(abilities) {
-    if(!Array.isArray(abilities)) {
+    if (!Array.isArray(abilities)) {
       throw new Error('Expected an array');
     }
 
-    this.abilities = abilities.map(rule => {
-      return new Rule(rule.actions, rule.subject);
-    });
+    this.abilities = abilities.map(rule => new Rule(rule.actions, rule.subject));
   }
 
   extend(ability) {
@@ -44,7 +42,7 @@ class Ability {
 
   can(action, subject) {
     const rule = this.getRule(subject);
-    if (!!rule) {
+    if (rule) {
       if (!rule.has(action)) {
         rule.add(action);
       }

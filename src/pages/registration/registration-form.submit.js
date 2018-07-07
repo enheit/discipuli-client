@@ -1,8 +1,8 @@
 import { Base64 } from 'js-base64';
 
-export default async (formValues, { props, resetForm }) => {
+export default async (formValues, formikBag) => {
   try {
-    const { data } = await props.register(
+    await formikBag.props.register(
       formValues.email,
       formValues.firstName,
       formValues.lastName,
@@ -10,7 +10,7 @@ export default async (formValues, { props, resetForm }) => {
       Base64.encode(formValues.repeatPassword),
     );
 
-    resetForm();
+    formikBag.resetForm();
   } catch (error) {
     console.error(error);
   }

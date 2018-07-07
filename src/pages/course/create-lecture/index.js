@@ -1,1 +1,1 @@
-export { default as CreateLecture } from './create-lecture';
+export { default } from './create-lecture';

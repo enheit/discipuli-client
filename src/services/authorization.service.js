@@ -1,5 +1,4 @@
-import { verify } from 'jsonwebtoken';
-import jsonwebtoken from 'jsonwebtoken';
+import jsonwebtoken, { verify } from 'jsonwebtoken';
 
 class Authorization {
   static setToken(token) {
@@ -21,9 +20,10 @@ class Authorization {
   static checkToken() {
     const token = localStorage.getItem('token');
     try {
-      const decoded = verify(token, 'secretKey');
+      verify(token, 'secretKey');
+
       return true;
-    } catch(error) {
+    } catch (error) {
       return false;
     }
   }

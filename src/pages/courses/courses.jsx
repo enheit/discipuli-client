@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { compose, graphql, withApollo } from 'react-apollo';
 
@@ -17,8 +18,10 @@ import reduceOptions from '../../utils/options-reducer';
 import DateFormat from '../../constants/date-format.constants';
 
 // Components
-import { CourseThumbnail } from './course-thumbnail';
-import { Text, Select, Headline, Button, ButtonLink } from '../../common';
+import CourseThumbnail from './course-thumbnail';
+import {
+  Text, Select, Headline, ButtonLink,
+} from '../../common';
 import Can from '../../common/can/can-bound';
 import routesConfig from '../../routes/routes.config';
 
@@ -29,13 +32,10 @@ class Courses extends Component {
     this.state = {
       isAuthorized: Authorization.checkToken(),
       specialization: null,
-      courses: [],
-    }
+    };
   }
 
-  formatDate = (date) => {
-    return moment(date).format(DateFormat.STANDARD);
-  }
+  formatDate = date => moment(date).format(DateFormat.STANDARD)
 
   handleSpecializationFilterChange = (option) => {
     this.setState({ specialization: option });
@@ -43,7 +43,7 @@ class Courses extends Component {
 
   filterCoursesBySpecialization = (course) => {
     // Return true in case filter by courses was not applied
-    if(!this.state.specialization) {
+    if (!this.state.specialization) {
       return true;
     }
 
@@ -79,6 +79,8 @@ class Courses extends Component {
         <div className="courses__filter">
           <div className="specialization">
             <Select
+              id="specialization"
+              name="specialization"
               value={this.state.specialization && this.state.specialization.value}
               loading={this.props.isSpecializationsLoading}
               placeholder="Specialization"
@@ -89,7 +91,9 @@ class Courses extends Component {
         </div>
         <div className="courses__info">
           <Text>
-            Found courses: {filteredCourses.length}
+            Found courses:
+            {' '}
+            {filteredCourses.length}
           </Text>
         </div>
         <div className="courses__list">
@@ -107,51 +111,75 @@ class Courses extends Component {
           ))}
         </div>
       </div>
-    )
+    );
   }
 }
 
 Courses.defaultProps = {
   courses: [],
   specializations: [],
-}
+};
+
+Courses.propTypes = {
+  isSpecializationsLoading: PropTypes.bool.isRequired,
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      endDate: PropTypes.string.isRequired,
+      specialization: PropTypes.string.isRequired,
+      specializationId: PropTypes.string.isRequired,
+      startDate: PropTypes.string.isRequired,
+      __typename: PropTypes.string.isRequired,
+    }),
+  ),
+  specializations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      __typename: PropTypes.string.isRequired,
+    }),
+  ),
+};
 
 const fetchCourses = () => {
   if (Authorization.checkToken()) { // Check if the user is authorized
     const { accountId } = Authorization.getProfile();
 
     const request = graphql(NOT_SUBSCRIBED_COURSES, {
-      options: (props) => ({
+      options: () => ({
         variables: {
           personAccountId: accountId,
         },
-        fetchPolicy: 'cache-and-network'
+        fetchPolicy: 'cache-and-network',
       }),
-      props: ({ data: { courses, loading } }, ownProps) => ({
-        courses,
-        isCoursesLoading: loading,
+      props: props => ({
+        courses: props.data.courses,
+        isCoursesLoading: props.data.loading,
       }),
     });
 
     return request;
   }
 
-  const request =  graphql(COURSES, {
-    props: ({ data: { courses, loading } }, ownProps) => ({
-      courses,
-      isCoursesLoading: loading,
+  const request = graphql(COURSES, {
+    props: props => ({
+      courses: props.data.courses,
+      isCoursesLoading: props.data.loading,
     }),
   });
 
   return request;
-}
+};
 
 export default compose(
   withApollo,
   graphql(SPECIALIZATIONS, {
-    props: ({ data: { specializations, loading } }, ownProps) => ({
-      specializations,
-      isSpecializationsLoading: loading,
+    props: props => ({
+      specializations: props.data.specializations,
+      isSpecializationsLoading: props.data.loading,
     }),
   }),
   fetchCourses(),

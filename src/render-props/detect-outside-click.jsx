@@ -16,7 +16,7 @@ class DetectOutsideClick extends Component {
   }
 
   handleClickOutside = (event) => {
-    if(this.ref && !this.ref.current.contains(event.target)) {
+    if (this.ref && !this.ref.current.contains(event.target)) {
       this.props.onClick();
     }
   }

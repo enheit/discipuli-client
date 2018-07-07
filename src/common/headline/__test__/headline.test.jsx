@@ -13,13 +13,13 @@ describe('Headline component', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should be rendered with class \'.headline--large\'', function() {
+  it('should be rendered with class \'.headline--large\'', () => {
     expect(shallow(<Headline title="Headline" large />)
       .is('.headline--large'))
       .toBe(true);
   });
 
-  it('should be rendered with class \'.headline--small\'', function() {
+  it('should be rendered with class \'.headline--small\'', () => {
     expect(shallow(<Headline title="Headline" small />)
       .is('.headline--small'))
       .toBe(true);

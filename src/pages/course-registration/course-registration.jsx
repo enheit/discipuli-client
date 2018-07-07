@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose, withApollo, graphql } from 'react-apollo';
 import { withFormik } from 'formik';
 import { withRouter } from 'react-router-dom';
@@ -18,13 +19,13 @@ import { Headline, Button, Text } from '../../common';
 import dateFormat from '../../constants/date-format.constants';
 
 class CourseRegistration extends Component {
-  getCourseName = () => {
-    return this.props.isCourseLoading
+  getCourseName = () => (
+    this.props.isCourseLoading
       ? 'Loading'
-      : `Registration for ${this.props.course.name}`;
-  }
+      : `Registration for ${this.props.course.name}`
+  )
 
-  getMonthDiff(leftBoundary, rightBoundary) {
+  getMonthDiff = (leftBoundary, rightBoundary) => {
     let months = 0;
 
     months = (rightBoundary.getFullYear() - leftBoundary.getFullYear()) * 12;
@@ -34,25 +35,23 @@ class CourseRegistration extends Component {
     return months <= 0
       ? 0
       : months;
-}
+  }
 
   getCourseDuration = () => {
-    if(this.props.isCourseLoading) {
+    if (this.props.isCourseLoading) {
       return 'Loading';
     }
 
-    const startDate = new Date(this.props.course.startDate)
+    const startDate = new Date(this.props.course.startDate);
     const endDate = new Date(this.props.course.endDate);
     const durationInMonth = this.getMonthDiff(startDate, endDate);
 
     return durationInMonth;
   }
 
-  getFormatedDate = (date) => {
-    return this.props.isCourseLoading
-      ? 'Loading'
-      : moment(this.props.course[date]).format(dateFormat.STANDARD);
-  }
+  getFormatedDate = date => (this.props.isCourseLoading
+    ? 'Loading'
+    : moment(this.props.course[date]).format(dateFormat.STANDARD))
 
   render() {
     return (
@@ -76,24 +75,35 @@ class CourseRegistration extends Component {
           />
           <div className="course-registration__details-item">
             <Text>
-              Location: {
-                !this.props.isCourseLoading && this.props.course.country
-              }, {!this.props.isCourseLoading && this.props.course.city}
+              Location:
+              {' '}
+              {!this.props.isCourseLoading && this.props.course.country}
+              ,
+              {' '}
+              {!this.props.isCourseLoading && this.props.course.city}
             </Text>
           </div>
           <div className="course-registration__details-item">
             <Text>
-              Start date: {this.getFormatedDate('startDate')}
+              Start date:
+              {' '}
+              {this.getFormatedDate('startDate')}
             </Text>
           </div>
           <div className="course-registration__details-item">
             <Text>
-              End date: {this.getFormatedDate('endDate')}
+              End date:
+              {' '}
+              {this.getFormatedDate('endDate')}
             </Text>
           </div>
           <div className="course-registration__details-item">
             <Text>
-              Duration: {this.getCourseDuration()} month(s)
+              Duration:
+              {' '}
+              {this.getCourseDuration()}
+              {' '}
+              month(s)
             </Text>
           </div>
 
@@ -111,19 +121,36 @@ class CourseRegistration extends Component {
           </Button>
         </form>
       </div>
-    )
+    );
   }
 }
+
+CourseRegistration.defaultProps = {
+  course: {},
+};
+
+CourseRegistration.propTypes = {
+  isCourseLoading: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  course: PropTypes.shape({
+    name: PropTypes.string,
+    city: PropTypes.string,
+    country: PropTypes.string,
+    startDate: PropTypes.string,
+    endDate: PropTypes.string,
+    __typename: PropTypes.string,
+  }),
+};
 
 export default compose(
   withRouter,
   withApollo,
   graphql(REGISTER_FOR_COURSE, {
-    props: ({ mutate }) => ({
+    props: props => ({
       registerForCourse: (
         courseId,
         personAccountId,
-      ) => mutate({
+      ) => props.mutate({
         variables: {
           courseId,
           personAccountId,
@@ -135,18 +162,18 @@ export default compose(
       // issues while still showing as much data as possible from your server.
       // It saves both data and errors into the Apollo Cache so your UI can
       // use them.
-      errorPolicy: 'all'
-    }
+      errorPolicy: 'all',
+    },
   }),
   graphql(COURSE_BY_ID, {
-    options: (props) => ({
+    options: props => ({
       variables: {
         courseId: props.match.params.courseId,
       },
     }),
-    props: ({ data: { course, loading } }, ownProps) => ({
-      course,
-      isCourseLoading: loading,
+    props: props => ({
+      course: props.data.course,
+      isCourseLoading: props.data.loading,
     }),
   }),
   withFormik({

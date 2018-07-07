@@ -1,1 +1,1 @@
-export { default as CourseSubscriptions } from './course-subscriptions';
+export { default } from './course-subscriptions';

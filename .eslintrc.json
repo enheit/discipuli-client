@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": ["jest"],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "react/destructuring-assignment": ["warn", "never"],
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
+  }
+}

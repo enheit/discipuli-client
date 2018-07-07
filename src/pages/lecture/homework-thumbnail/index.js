@@ -1,1 +1,1 @@
-export { default as HomeworkThumbnail } from './homework-thumbnail';
+export { default } from './homework-thumbnail';

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 
 // GraphQL Queries
@@ -6,52 +7,50 @@ import COURSE_SUBSCRIPTIONS from './graphql/queries/course-subscriptions.graphql
 
 // Components
 import { Headline } from '../../common';
-import { SubscriptionThumbnail } from './subscription-thumbnail';
+import SubscriptionThumbnail from './subscription-thumbnail';
 
 // Services
 import Authorization from '../../services/authorization.service';
 
-class CourseSubscriptions extends Component {
-  render() {
-    return (
-      <div className="course-subscriptions">
-        <div className="course-subscriptions__title">
-          <Headline
-            large
-            title="Subscriptions"
-          />
-        </div>
-        <div className="course-subscriptions__courses">
-          {this.props.courses.map(course => {
-            return (
-              <SubscriptionThumbnail
-                key={course.id}
-                name={course.name}
-                specializationId={course.specializationId}
-                courseId={course.id}
-              />
-            )
-          })}
-        </div>
-      </div>
-    )
-  }
-}
+const CourseSubscriptions = props => (
+  <div className="course-subscriptions">
+    <div className="course-subscriptions__title">
+      <Headline
+        large
+        title="Subscriptions"
+      />
+    </div>
+    <div className="course-subscriptions__courses">
+      {props.courses.map(course => (
+        <SubscriptionThumbnail
+          key={course.id}
+          id={course.id}
+          name={course.name}
+          specializationId={course.specializationId}
+        />
+      ))}
+    </div>
+  </div>
+);
 
 CourseSubscriptions.defaultProps = {
   courses: [],
-}
+};
+
+CourseSubscriptions.propTypes = {
+  courses: PropTypes.arrayOf(PropTypes.shape(SubscriptionThumbnail.propTypes)),
+};
 
 export default compose(
   graphql(COURSE_SUBSCRIPTIONS, {
-    options: (props) => ({
+    options: () => ({
       variables: {
         personAccountId: Authorization.getProfile().accountId,
       },
     }),
-    props: ({ data: { courses, loading } }, ownProps) => ({
-      courses,
-      isCoursesLoading: loading,
+    props: props => ({
+      courses: props.data.courses,
+      isCoursesLoading: props.data.loading,
     }),
   }),
 )(CourseSubscriptions);

@@ -12,7 +12,7 @@ it('should call onChange prop', () => {
       type="text"
       value=""
       onChange={onChangeMock}
-    />
+    />,
   );
   component.find('input').simulate('change', 'Expected value!');
   expect(onChangeMock).toBeCalledWith(expectedValue);

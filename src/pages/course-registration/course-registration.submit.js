@@ -4,15 +4,15 @@ import Authorization from '../../services/authorization.service';
 // Configs
 import routes from '../../routes/routes.config';
 
-export default async (formValues, { props }) => {
+export default async (formValues, formikBag) => {
   try {
-    const subscription = await props.registerForCourse(
-      props.match.params.courseId,
+    await formikBag.props.registerForCourse(
+      formikBag.props.match.params.courseId,
       Authorization.getProfile().accountId,
     );
 
     // Redirect to the list of courses
-    props.history.push(routes.courses());
+    formikBag.props.history.push(routes.courses());
   } catch (error) {
     console.error(error);
   }
