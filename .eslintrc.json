@@ -1,13 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["jest"],
+  "extends": [
+    "airbnb",
+    "prettier/react"
+  ],
+  "plugins": [
+    "jest",
+    "prettier"
+  ],
   "env": {
     "browser": true,
     "jest": true
   },
   "rules": {
     "react/destructuring-assignment": ["warn", "never"],
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "prettier/prettier": "error"
   }
 }
